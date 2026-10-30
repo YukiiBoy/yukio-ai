@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Velora Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="admin">
+    <div class="admin-wrapper">
+      <aside class="admin-sidebar">
+        <div class="brand">
+          <div class="brand-mark">V</div>
+          <div class="brand-text">
+            <span>Velora</span>
+            <small>ADMIN</small>
+          </div>
+        </div>
+
+        <nav class="admin-nav">
+          <a href="index.html">Ke Toko</a>
+          <a href="admin.html" class="active">Produk</a>
+          <a href="#orders">Pesanan</a>
+        </nav>
+      </aside>
+
+      <main class="admin-main">
+        <section class="admin-panel">
+          <div class="admin-heading">
+            <div>
+              <span class="eyebrow">Admin</span>
+              <h1>Kelola Produk</h1>
+            </div>
+            <button class="btn primary-btn" id="resetDemoBtn">Reset Demo</button>
+          </div>
+
+          <form id="productForm" class="admin-form">
+            <div class="form-row">
+              <input type="text" id="productName" placeholder="Nama Produk" required />
+              <input type="text" id="productEmoji" placeholder="Emoji (contoh: 💬)" required />
+            </div>
+
+            <div class="form-row">
+              <select id="productCategory" required>
+                <option value="">Pilih Kategori</option>
+                <option value="discord">Discord</option>
+                <option value="roblox">Roblox</option>
+                <option value="music">Music</option>
+                <option value="streaming">Streaming</option>
+                <option value="game">Game</option>
+              </select>
+
+              <input type="text" id="productTag" placeholder="Tag (contoh: Discord)" required />
+            </div>
+
+            <div class="form-row">
+              <input type="number" id="productPrice" placeholder="Harga" required min="1000" />
+              <input type="number" id="productOldPrice" placeholder="Harga Lama" min="1000" />
+            </div>
+
+            <textarea id="productDescription" rows="4" placeholder="Deskripsi produk" required></textarea>
+
+            <div class="admin-form-actions">
+              <button type="submit" class="btn primary-btn">Simpan Produk</button>
+              <button type="button" class="btn secondary-btn" id="cancelEditBtn">Batal</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="admin-panel" id="orders">
+          <div class="admin-heading">
+            <div>
+              <span class="eyebrow">Data</span>
+              <h2>Pesanan Masuk</h2>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Produk</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-panel">
+          <div class="admin-heading">
+            <div>
+              <span class="eyebrow">Data</span>
+              <h2>Daftar Produk</h2>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Kategori</th>
+                  <th>Harga</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+                </html>
