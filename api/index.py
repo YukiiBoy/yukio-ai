@@ -9,10 +9,7 @@ API_URL = "https://api.tokenjuice.ai/v1/chat/completions"
 
 HTML_PAGE = '''
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yukio AI V3</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css">
@@ -31,33 +28,27 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .chat-item:hover,.chat-item.active{background:var(--card);color:var(--text);border-color:var(--primary)}
 #main{flex:1;display:flex;flex-direction:column;min-width:0}
 #topbar{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
-.hamburger{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);display:none;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+.hamburger{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
 .badge{padding:6px 12px;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.25);border-radius:20px;font-size:11px;font-weight:600;color:var(--primary)}
 #chat{flex:1;overflow-y:auto;padding:24px 0}
 .chat-inner{max-width:780px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;gap:24px}
-.welcome{text-align:center;padding:40px 0}
-.welcome h2{font-size:34px;font-weight:800;margin-bottom:12px}
+.welcome{text-align:center;padding:40px 0}.welcome h2{font-size:34px;font-weight:800;margin-bottom:12px}
 .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px auto 0;max-width:520px}
 .q-card{padding:14px;background:var(--card);border:1px solid var(--border);border-radius:14px;cursor:pointer;text-align:left}
 .q-card:hover{border-color:var(--primary)}
-.q-card b{font-size:13px;display:block}.q-card span{font-size:11px;color:var(--muted)}
 .msg{display:flex;gap:12px}.avatar{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0}
 .u{background:#fff;color:#000}.y{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}
 .bubble{flex:1;line-height:1.7;font-size:14px;min-width:0}
 .bubble pre{background:#0f0f14 !important;border:1px solid var(--border);border-radius:12px;padding:14px;margin:12px 0;overflow-x:auto}
 #inputArea{padding:14px 16px 20px}
 .input-box{max-width:780px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:6px 6px 6px 18px;display:flex;gap:10px;align-items:flex-end}
-.input-box:focus-within{border-color:var(--primary)}
 #msg{flex:1;background:transparent;border:none;color:var(--text);outline:none;font-size:14px;resize:none;min-height:22px;max-height:120px;font-family:inherit;padding:8px 0}
 #send{width:38px;height:38px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;cursor:pointer}
 #overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90}
 @media(max-width:900px){
-.hamburger{display:flex}
 #sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%)}
 #sidebar.open{transform:translateX(0)}
 #overlay.show{display:block}
-.welcome h2{font-size:26px}
-.quick{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -67,7 +58,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="brand"><div class="brand-logo">Y</div><div><b>Yukio AI</b><br><span style="font-size:10px;color:var(--muted)">BY YUKIOSHOP • V3 FAST</span></div></div>
 <button class="btn-new" onclick="newChat(); if(window.innerWidth<=900) toggleSidebar()">+ New Chat</button>
 <div id="history"></div>
-<div style="padding:10px;font-size:10px;color:var(--muted);border-top:1px solid var(--border)">2026 Yukioshop • V3 Stable</div>
 </div>
 <div id="main">
 <div id="topbar"><button class="hamburger" onclick="toggleSidebar()">☰</button><div style="font-weight:700;flex:1">Chat</div><div class="badge">⚡ DeepSeek-V3 • Fast</div></div>
@@ -80,7 +70,7 @@ function toggleSidebar(){document.getElementById('sidebar').classList.toggle('op
 function save(){localStorage.setItem('yukio_v3',JSON.stringify(chats));localStorage.setItem('yukio_cur',cur);renderH()}
 function newChat(){cur=Date.now().toString();chats.unshift({id:cur,title:'New Chat',messages:[]});save();renderC();}
 function renderH(){let h=document.getElementById('history');h.innerHTML='';chats.forEach(c=>{let d=document.createElement('div');d.className='chat-item'+(c.id===cur?' active':'');d.textContent=c.title;d.onclick=()=>{cur=c.id;save();renderC();if(innerWidth<=900)toggleSidebar()};h.appendChild(d);});}
-function renderW(){let inner=document.getElementById('chatInner');if(chats.find(c=>c.id===cur)?.messages?.length>0)return;inner.innerHTML='<div class=welcome><h2>Yukio AI V3<br>Super cepat.</h2><p style=color:var(--muted);font-size:13px>Tap ☰ buat buka history</p><div class=quick><div class=q-card onclick="fillQ(this)"><b>🎫 Bot Ticket + Transkrip</b><span>Button & Embed</span></div><div class=q-card onclick="fillQ(this)"><b>🛒 Bot Toko</b><span>Keranjang modern</span></div><div class=q-card onclick="fillQ(this)"><b>🌐 Web Portfolio</b><span>Modern</span></div><div class=q-card onclick="fillQ(this)"><b>🔧 Fix Error</b><span>Debug cepat</span></div></div></div>';}
+function renderW(){let inner=document.getElementById('chatInner');if(chats.find(c=>c.id===cur)?.messages?.length>0)return;inner.innerHTML='<div class=welcome><h2>Yukio AI V3<br>Super cepat.</h2><p style=color:var(--muted);font-size:13px>Tap ☰ buat history</p><div class=quick><div class=q-card onclick="fillQ(this)"><b>🎫 Bot Ticket + Transkrip</b><span>Button & Embed</span></div><div class=q-card onclick="fillQ(this)"><b>🛒 Bot Toko</b><span>Keranjang modern</span></div></div></div>';}
 function fillQ(el){document.getElementById('msg').value=el.querySelector('b').innerText;sendMsg();}
 function renderC(){let ch=chats.find(c=>c.id===cur);let inner=document.getElementById('chatInner');if(!ch){if(!chats.length)newChat();return;}if(ch.messages.length===0){renderW();return;}inner.innerHTML='';ch.messages.forEach(m=>{let d=document.createElement('div');d.className='msg';d.innerHTML='<div class="avatar '+(m.role==='user'?'u':'y')+'">'+(m.role==='user'?'U':'Y')+'</div><div class=bubble>'+(m.role==='user'?escapeHtml(m.content):marked.parse(m.content))+'</div>';inner.appendChild(d);});inner.querySelectorAll('pre code').forEach(e=>hljs.highlightElement(e));document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
 function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -98,39 +88,29 @@ def home():
     return HTML_PAGE
 
 @app.route("/chat", methods=["POST"])
-def chat():
+def chat_api():
     try:
         data = request.get_json(silent=True) or {}
         msg = data.get("message","").strip()
         if not msg:
             return jsonify({"reply": "Ketik dulu bos"})
-        
-        headers = {
-            "Authorization": f"Bearer {JUICE_KEY}",
-            "Content-Type": "application/json"
-        }
+        headers = {"Authorization": f"Bearer {JUICE_KEY}", "Content-Type": "application/json"}
         payload = {
             "model": "deepseek-ai/DeepSeek-V3",
             "messages": [
-                {"role": "system", "content": "Kamu Yukio AI V3 asisten coding handal by Yukioshop. Jawab cepat, kasih kode lengkap markdown."},
+                {"role": "system", "content": "Kamu Yukio AI V3 by Yukioshop. Jawab cepat, kasih kode lengkap markdown."},
                 {"role": "user", "content": msg}
             ],
             "max_tokens": 3000,
             "temperature": 0.7
         }
-        r = requests.post(API_URL, headers=headers, json=payload, timeout=15)
+        r = requests.post(API_URL, headers=headers, json=payload, timeout=20)
         if r.status_code != 200:
-            return jsonify({"reply": f"Error API {r.status_code}: {r.text[:500]}"})
-        
-        res = r.json()
-        reply = res["choices"][0]["message"]["content"]
+            return jsonify({"reply": f"Error {r.status_code}: {r.text[:500]}"})
+        reply = r.json()["choices"][0]["message"]["content"]
         return jsonify({"reply": reply})
     except Exception as e:
-        return jsonify({"reply": f"Error: {e}"})
+        return jsonify({"reply": f"Error V3: {e}"})
 
-# Penting buat Vercel rewrite
-@app.route("/<path:path>", methods=["GET", "POST"])
-def catch_all(path):
-    if path == "chat":
-        return chat()
-    return HTML_PAGE
+# Export app for Vercel
+# Vercel will handle all routes to this app
