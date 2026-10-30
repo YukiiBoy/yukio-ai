@@ -119,7 +119,7 @@ def main_route():
                 if h.get("role") in ["user","assistant"]:
                     messages.append({"role":h["role"],"content":h["content"][:2000]})
             messages.append({"role":"user","content":msg})
-            payload = {"model":"deepseek-ai/DeepSeek-V3","messages":messages,"max_tokens":4000,"temperature":0.7}
+            payload = {"model":"deepseek-ai/DeepSeek-V4.1-Flash-1017","messages":messages,"max_tokens":4000,"temperature":0.7}
             r = requests.post(API_URL, headers=headers, json=payload, timeout=25)
             if r.status_code != 200:
                 return jsonify({"reply": f"Error API {r.status_code}: {r.text[:600]}"})
