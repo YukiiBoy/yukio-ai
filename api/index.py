@@ -187,7 +187,20 @@ def main_route():
             r = requests.post(API_URL, headers=headers, json=payload, timeout=35)
             if r.status_code != 200:
                 return jsonify({"reply": f"Error {r.status_code}: {r.text[:600]} Coba ganti model!"})
-            reply = r.json()["choices"][0]["message"]["content"]
+            # GANTI BAGIAN INI DI CODE LAMA LU:
+# r = requests.post(...)
+# reply = r.json()["choices"][0]["message"]["content"]  <-- INI YANG BIKIN ERROR CHAR 0
+
+# JADI INI:
+if not r.text or r.status_code != 200:
+    return jsonify({"reply": f"Error GitHub {r.status_code}: {r.text[:500]} - Coba ganti model ke gpt-4o-mini"})
+try:
+    j = r.json()
+    reply = j["choices"][0]["message"]["content"]
+except:
+    # Fallback ke Pollinations kalau GitHub ngasih kosong
+    pr = requests.get(f"https://text.pollinations.ai/{requests.utils.quote(msg)}", timeout=15)
+    reply = pr.text if pr.status_code==200 else f"Error parse: {r.text[:500]}"
             return jsonify({"reply": reply})
         except Exception as e:
             return jsonify({"reply": f"Error: {e}"})
