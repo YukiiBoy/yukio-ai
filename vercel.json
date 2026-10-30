@@ -1,3 +1,19 @@
+
+### 2. `vercel.json` - GANTI JADI INI (BIAR GAK WARNING REWRITE):
+
+```json
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.py"
+    }
+  ]
 }
