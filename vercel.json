@@ -1,7 +1,3 @@
-
-### 2. `vercel.json` - GANTI JADI INI (BIAR GAK WARNING REWRITE):
-
-```json
 {
   "version": 2,
   "builds": [
