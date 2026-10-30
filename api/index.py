@@ -48,6 +48,3 @@ def chat():
         import traceback
         traceback.print_exc()
         return jsonify({"reply": f"Error server: {str(e)}"})
-
-# Vercel butuh ini
-app = app
